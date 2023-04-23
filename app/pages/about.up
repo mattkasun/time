@@ -1,0 +1,9 @@
+<div id="About">
+<h2>TimeTraceGui</h2>
+<small>Version ^Version</small>
+<h3>©2021-2023 Matthew R Kasun</h3>
+<a href='mailto://mkasun@nusak.ca?subject=timetrace-gui'>mkasun@nusak.ca</a><br>
+<a href='https://github.com/mattkasun/timetrace-gui' target='_blank'>github.com/mattkasun/timetrace-gui</a>
+<br><br>
+<button class="w3-button w3-teal w3-block w3-padding" onclick="document.getElementById('About').style.display='none'">Close</button>
+</div>

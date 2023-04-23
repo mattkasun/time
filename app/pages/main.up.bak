@@ -1,0 +1,47 @@
+^handler {
+    if err:=auth(req); err !=nil {
+        log.Println(err)
+		setMessage(err.Error())
+        http.Redirect(w, req, "/error/", http.StatusSeeOther)
+        return nil
+    }
+	if err:= InitializeDatabase(); err != nil {
+		return err
+	}
+	report := Status()
+
+
+}
+
+
+<div id="main" class="w3-white tab w3-padding"> {{/*style="margin-right:200px"> */}}
+	<label>Current Project</label>
+	<p>^Junk</p>
+	<label >^report.Current.Project</label><br>
+	<ul>
+		<li><label>Time This Session </label>
+			<label >^report.Session</label><br></li>
+			<li><label>Time Today </label>
+				<label >^report.Today</label><br></li>
+	</ul>
+{{ if .Tracking }}
+  <form action="/" method=Post>
+		<button class="w3-button" type=submit><span class="material-icons-two-tone">timer_off</span> Stop</button>
+		<input type=hidden name=action value=stop>
+	</form>
+{{end}}
+
+<h2> Time worked today </h2>
+//for key, value := range report.Summary {
+^for i := 0; i <10; i++{
+	<text><p>Number ^i</p>
+	<strong><label>^key</label></strong>^value<br></br></text>
+//}
+}
+{{end}}
+<br>
+<strong><label>Total Time Today</label></strong>
+	<label >report.Total</label><br>
+	<strong>	<label>Total Breaks</label></strong>
+	<label >{{.Breaks}}</label><br>
+</div>

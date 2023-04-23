@@ -1,0 +1,31 @@
+^import "fmt"
+^import "log"
+
+^handler {
+    if err:=auth(req); err !=nil {
+        log.Println(err)
+		setMessage(err.Error())
+        http.Redirect(w, req, "/error/", http.StatusSeeOther)
+        return nil
+    }
+	if err:= InitializeDatabase(); err != nil {
+		log.Println("main page, InitializeDatabase", err)
+		//return fmt.Errorf("main.InitializeDatabase: %w", err)
+	}
+	report := Status()
+	log.Println("report on main page", report)
+
+}
+
+
+<div id="main" class="w3-white tab w3-padding"> 
+	<label>Current Project</label>
+	<p>^Junk</p>
+	^if report.Current == nil{
+		<h3> Not Currently Tracking </h3>
+	}
+	^if report.Current != nil{
+		<p>^report.Current.Project</p>
+	}
+
+</div>

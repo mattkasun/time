@@ -1,0 +1,10 @@
+^{
+    error := getError()
+}
+<html>
+<body>
+<h1> Error</h1>
+<p>^error</p>
+<p><a href=/login>login</a></p>
+</body>
+</html>

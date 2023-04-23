@@ -1,0 +1,64 @@
+^import "time"
+
+^handler {
+    //var devReloadFlagSet bool
+    //for _, arg := range up.buildCliArgs() {
+    //    if arg == "-dev" {
+    //        devReloadFlagSet = true
+    //        break
+    //    }
+    //}
+    devReloadFlagSet := false
+    if err:=auth(req); err !=nil {
+        log.Println(err)
+		setMessage(err.Error())
+        http.Redirect(w, req, "/error/", http.StatusSeeOther)
+        return nil
+    }
+}
+
+^{
+    title := pushupGreeting // pushupGreeting declared in app/pkg/app.go
+    greeting := "Hello"
+    name := "World"
+}
+
+^section title {
+    <text>^pushupGreeting</text>
+}
+
+<hgroup class="greeting">
+    <h1>^greeting, ^name!</h1>
+    <h2>^title</h2>
+</hgroup>
+
+<p>You just created, built, and ran a new web app in Pushup.</p>
+
+<p>Pushup is a server-side web framework for Go.</p>
+
+<p>It is currently ^time.Now().Format(time.UnixDate).</p>
+<p>Hello ^name</p>
+
+<section>
+    <h3>Features</h3>
+    <ul>
+        <li><strong>Page-oriented</strong> &mdash; <tt>.up</tt> files combining HTML and Go map to URL routes</li>
+        <li><strong>Compiled</strong> &mdash; compiles to pure Go code using <tt>net/http</tt>, builds a single static binary executable</li>
+        <li><strong>Inline partials</strong> &mdash; enhanced hypermedia for better client-side interactivity with less JavaScript</li>
+    </ul>
+</section>
+
+<section>
+    <h3>What to do next?</h3>
+    <ul>
+        <li>Design the layout template at <tt>app/layouts/default.up</tt></li>
+        <li>Override this file at <tt>app/pages/index.up</tt></li>
+        ^if !devReloadFlagSet {
+            <li>Check out the live reloading mode with the CLI flag <tt>-dev</tt></li>
+        } ^else {
+            <li>Great, you set the <tt>-dev</tt> flag for live reloading!</li>
+        }
+        <li>Add new Pushup pages to <tt>app/pages</tt> and see them appear as routes</li>
+        <li><a href="https://pushup.adhoc.dev/docs/">Read the docs</a></li>
+    </ul>
+</section>
